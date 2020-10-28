@@ -223,10 +223,23 @@ public:
 
 
     fileCommandFacility(std::string uri) : CommandFacility(uri) {
+        if (uri.size() < 5 or "file:" != uri.substr(5)) {
+            if (uri[0] == '/') {
+                uri = "file://" + uri;
+            }
+            else {
+                uri = "file:" + uri;
+            }
+        }
+
         folly::Uri puri(uri);
+        ERS_INFO("uri: " << uri);
         const auto path = puri.path();
         const auto scheme = puri.scheme();
         const auto queryparams = puri.getQueryParams();
+
+        ERS_INFO("url: scheme:" << scheme
+                 << " path:" << path);
 
         if (!(scheme.empty() || scheme == "file")) {
             ERS_INFO("unknown scheme for URL: " << uri);

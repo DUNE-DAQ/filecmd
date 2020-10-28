@@ -27,6 +27,14 @@ void run_dump(std::string uri)
 
 int main(int argc, char* argv[])
 {
+    try {
+        run_dump("simplefile.json");
+    }
+    catch (const std::invalid_argument& err) {
+        std::cerr << "Folly::Uri does not support simple file paths"
+                  << std::endl;
+
+    }
     run_dump("file:zero.json");
     run_dump("file://two.json?illegal=yes&fileis=domain");
     run_dump("file:///three.json");
@@ -36,13 +44,17 @@ int main(int argc, char* argv[])
         run_dump("relative-with-param.json?fmt=jstream&another=42");
     }
     catch (const std::invalid_argument& err) {
-        std::cerr << "Folly::Uri does not support relative file path with params" << std::endl;
+        std::cerr
+            << "Folly::Uri does not support relative file path with params"
+            << std::endl;
     }
     try {
         run_dump("/dev/stdin?fmt=jstream&another=42");
     }
     catch (const std::invalid_argument& err) {
-        std::cerr << "Folly::Uri does not support absolute file path with params" << std::endl;
+        std::cerr
+            << "Folly::Uri does not support absolute file path with params"
+            << std::endl;
     }
     run_dump("http://example.com:4321/path?foo=bar");
     run_dump("http://user:pass@example.com:4321/path?foo=bar");
