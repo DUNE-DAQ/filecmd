@@ -1,0 +1,4 @@
+#+title: DUNE DAQ File Command Facility
+
+This package provides a DUNE DAQ ~cmdlib~ Command Facility plugin which uses a file-based interface to receive command objects.
+
