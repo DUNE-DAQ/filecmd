@@ -223,7 +223,7 @@ public:
 
 
     fileCommandFacility(std::string uri) : CommandFacility(uri) {
-        if (uri.size() < 5 or "file:" != uri.substr(5)) {
+        if (uri.size() < 5 or "file:" != uri.substr(0, 5)) {
             if (uri[0] == '/') {
                 uri = "file://" + uri;
             }
