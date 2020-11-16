@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.4...3.12)
 project(filecmd VERSION 0.0.0)
 
-find_package(daq-buildtools 1.2.1 REQUIRED)
+find_package(daq-cmake REQUIRED)
 daq_setup_environment()
 
 find_package(cmdlib REQUIRED)
